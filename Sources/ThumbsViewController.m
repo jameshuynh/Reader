@@ -273,7 +273,8 @@
 
 - (void)tappedInToolbar:(ThumbsMainToolbar *)toolbar doneButton:(UIButton *)button
 {
-	[delegate dismissThumbsViewController:self]; // Dismiss thumbs display
+	// [delegate dismissThumbsViewController:self]; // Dismiss thumbs display
+    [delegate dismissReaderViewController];
 }
 
 #pragma mark - UIThumbsViewDelegate methods
@@ -376,7 +377,6 @@
 	{
 		imageView.contentMode = UIViewContentModeCenter;
 		defaultRect = CGRectInset(self.bounds, CONTENT_INSET, CONTENT_INSET);
-        NSLog(@"default rect %lf - %lf + %lf - %lf", defaultRect.size.width, defaultRect.size.height, self.bounds.size.width, self.bounds.size.height);
 		maximumSize = defaultRect.size; // Maximum thumb content size
 
 		CGFloat newWidth = ((defaultRect.size.width / 4.0f) * 3.0f);

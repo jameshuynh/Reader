@@ -39,6 +39,8 @@
 
 - (void)dismissThumbsViewController:(ThumbsViewController *)viewController;
 
+- (void) dismissReaderViewController;
+
 @end
 
 @interface ThumbsViewController : UIViewController

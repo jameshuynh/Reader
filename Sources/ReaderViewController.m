@@ -875,12 +875,22 @@ ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
 #endif // end of READER_ENABLE_THUMBS Option
 }
 
+- (void) dismissReaderViewController {
+    if ([delegate respondsToSelector:@selector(dismissReaderViewController:)] == YES)
+    {
+        [delegate dismissReaderViewController:self]; // Dismiss the ReaderViewController
+    }
+    else // We have a "Delegate must respond to -dismissReaderViewController:" error
+    {
+        NSAssert(NO, @"Delegate must respond to -dismissReaderViewController:");
+    }
+}
+
 - (void)dismissThumbsViewController:(ThumbsViewController *)viewController
 {
 #if (READER_ENABLE_THUMBS == TRUE) // Option
     
-    [[self presentingViewController] dismissViewControllerAnimated:YES completion:nil];
-    // [self dismissViewControllerAnimated:NO completion:NULL];
+    [self dismissViewControllerAnimated:NO completion:NULL];
     
 #endif // end of READER_ENABLE_THUMBS Option
 }
