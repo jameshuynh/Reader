@@ -58,7 +58,7 @@
 
 #define TOOLBAR_HEIGHT 44.0f
 
-#define PAGE_THUMB_SMALL 160
+#define PAGE_THUMB_SMALL 164
 #define PAGE_THUMB_LARGE 256
 
 #pragma mark - Properties
@@ -92,7 +92,7 @@
 
 	assert(delegate != nil); assert(document != nil);
 
-	self.view.backgroundColor = [UIColor grayColor]; // Neutral gray
+	self.view.backgroundColor = [UIColor colorWithRed:0.6 green:0.6 blue:0.6 alpha:1]; // Neutral gray
 
 	CGRect scrollViewRect = self.view.bounds; UIView *fakeStatusBar = nil;
 
@@ -117,6 +117,7 @@
 	CGRect toolbarRect = scrollViewRect; // Toolbar frame
 	toolbarRect.size.height = TOOLBAR_HEIGHT; // Default toolbar height
 	mainToolbar = [[ThumbsMainToolbar alloc] initWithFrame:toolbarRect title:toolbarTitle]; // ThumbsMainToolbar
+    mainToolbar.backgroundColor = [UIColor whiteColor];
 	mainToolbar.delegate = self; // ThumbsMainToolbarDelegate
 	[self.view addSubview:mainToolbar];
 
@@ -150,7 +151,7 @@
 	}
 	else // Set thumb size for large (iPad) devices
 	{
-		[theThumbsView setThumbSize:CGSizeMake(PAGE_THUMB_LARGE, PAGE_THUMB_LARGE)];
+		[theThumbsView setThumbSize:CGSizeMake(180, 249)];
 	}
 }
 
@@ -374,9 +375,8 @@
 	if ((self = [super initWithFrame:frame]))
 	{
 		imageView.contentMode = UIViewContentModeCenter;
-
 		defaultRect = CGRectInset(self.bounds, CONTENT_INSET, CONTENT_INSET);
-
+        NSLog(@"default rect %lf - %lf + %lf - %lf", defaultRect.size.width, defaultRect.size.height, self.bounds.size.width, self.bounds.size.height);
 		maximumSize = defaultRect.size; // Maximum thumb content size
 
 		CGFloat newWidth = ((defaultRect.size.width / 4.0f) * 3.0f);
@@ -384,7 +384,6 @@
 		CGFloat offsetX = ((defaultRect.size.width - newWidth) * 0.5f);
 
 		defaultRect.size.width = newWidth; defaultRect.origin.x += offsetX;
-
 		imageView.frame = defaultRect; // Update the image view frame
 
 		CGFloat fontSize = (([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 19.0f : 16.0f);

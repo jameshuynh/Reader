@@ -156,7 +156,7 @@ static inline CGFloat zoomScaleThatFits(CGSize target, CGSize source)
 #if (READER_SHOW_SHADOWS == TRUE) // Option
 
 			theContainerView.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
-			theContainerView.layer.shadowRadius = 4.0f; theContainerView.layer.shadowOpacity = 1.0f;
+			theContainerView.layer.shadowRadius = 4.0f; theContainerView.layer.shadowOpacity = 0.1f;
 			theContainerView.layer.shadowPath = [UIBezierPath bezierPathWithRect:theContainerView.bounds].CGPath;
 
 #endif // end of READER_SHOW_SHADOWS Option
