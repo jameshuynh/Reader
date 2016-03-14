@@ -123,7 +123,7 @@
             CGRect titleRect = CGRectMake(67, 0, titleWidth, 44);
             
             UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
-            titleLabel.text = @"PDF VIEWER";
+            titleLabel.text = title;
             titleLabel.textAlignment = NSTextAlignmentCenter;
             titleLabel.font = [UIFont fontWithName:@"UniversLTStd-cn" size:17];
 			titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;

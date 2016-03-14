@@ -40,6 +40,7 @@
 @interface ReaderViewController : UIViewController
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString* title;
 
 - (instancetype)initWithReaderDocument:(ReaderDocument *)object;
 

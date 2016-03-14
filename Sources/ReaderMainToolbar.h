@@ -46,8 +46,9 @@
 @interface ReaderMainToolbar : UIXToolbarView
 
 @property (nonatomic, weak, readwrite) id <ReaderMainToolbarDelegate> delegate;
+@property (nonatomic, strong) NSString* title;
 
-- (instancetype)initWithFrame:(CGRect)frame document:(ReaderDocument *)document;
+- (instancetype)initWithFrame:(CGRect)frame document:(ReaderDocument *)document title:(NSString *)title;
 
 - (void)setBookmarkState:(BOOL)state;
 

@@ -50,6 +50,7 @@
 
 	BOOL updateBookmarked;
 	BOOL showBookmarked;
+    NSString *title;
 }
 
 #pragma mark - Constants
@@ -67,12 +68,13 @@
 
 #pragma mark - UIViewController methods
 
-- (instancetype)initWithReaderDocument:(ReaderDocument *)object
+- (instancetype)initWithReaderDocument:(ReaderDocument *)object title:(NSString *)inputTitle
 {
 	if ((self = [super initWithNibName:nil bundle:nil])) // Initialize superclass
 	{
 		if ((object != nil) && ([object isKindOfClass:[ReaderDocument class]])) // Valid object
 		{
+            title = inputTitle;
 			updateBookmarked = YES; bookmarked = [NSMutableArray new]; // Bookmarked pages
 
 			document = object; // Retain the ReaderDocument object for our use
@@ -112,7 +114,7 @@
 		}
 	}
 
-	NSString *toolbarTitle = [document.fileName stringByDeletingPathExtension];
+    NSString *toolbarTitle = title == nil ? [document.fileName stringByDeletingPathExtension] : title;
 
 	CGRect toolbarRect = scrollViewRect; // Toolbar frame
 	toolbarRect.size.height = TOOLBAR_HEIGHT; // Default toolbar height

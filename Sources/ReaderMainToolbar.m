@@ -61,15 +61,16 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
-	return [self initWithFrame:frame document:nil];
+	return [self initWithFrame:frame document:nil title:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame document:(ReaderDocument *)document
+- (instancetype)initWithFrame:(CGRect)frame document:(ReaderDocument *)document title:(NSString *)titleInput
 {
 	assert(document != nil); // Must have a valid ReaderDocument
 
 	if ((self = [super initWithFrame:frame]))
 	{
+        self.title = titleInput;
 		CGFloat viewWidth = self.bounds.size.width; // Toolbar view width
 
 #if (READER_FLAT_UI == TRUE) // Option
@@ -216,7 +217,7 @@
 			CGRect titleRect = CGRectMake(67, 0, titleWidth, 44);
 
 			UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
-            titleLabel.text = @"PDF VIEWER";
+            titleLabel.text = self.title;
 			titleLabel.textAlignment = NSTextAlignmentCenter;
 			titleLabel.font = [UIFont fontWithName:@"UniversLTStd-cn" size:17];
 			titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;

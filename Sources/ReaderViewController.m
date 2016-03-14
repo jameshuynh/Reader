@@ -286,7 +286,11 @@ ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
 
 #pragma mark - UIViewController methods
 
-- (instancetype)initWithReaderDocument:(ReaderDocument *)object
+- (instancetype)initWithReaderDocument:(ReaderDocument *)object {
+    return [self initWithReaderDocument:object withTitle:@"PDF VIEWER"];
+}
+
+- (instancetype)initWithReaderDocument:(ReaderDocument *)object withTitle:(NSString *)titleInput
 {
     if ((self = [super initWithNibName:nil bundle:nil])) // Initialize superclass
     {
@@ -305,6 +309,7 @@ ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
             [object updateDocumentProperties]; document = object; // Retain the supplied ReaderDocument object for our use
             
             [ReaderThumbCache touchThumbCacheWithGUID:object.guid]; // Touch the document thumb cache directory
+            self.title = titleInput;
         }
         else // Invalid ReaderDocument object
         {
@@ -355,7 +360,7 @@ ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
     [self.view addSubview:theScrollView];
     
     CGRect toolbarRect = viewRect; toolbarRect.size.height = TOOLBAR_HEIGHT;
-    mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document]; // ReaderMainToolbar
+    mainToolbar = [[ReaderMainToolbar alloc] initWithFrame:toolbarRect document:document title:self.title]; // ReaderMainToolbar
     mainToolbar.delegate = self; // ReaderMainToolbarDelegate
     mainToolbar.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:mainToolbar];
@@ -726,7 +731,7 @@ ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate,
     
     if (printInteraction != nil) [printInteraction dismissAnimated:NO];
     
-    ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document];
+    ThumbsViewController *thumbsViewController = [[ThumbsViewController alloc] initWithReaderDocument:document title:self.title];
     
     thumbsViewController.title = self.title; thumbsViewController.delegate = self; // ThumbsViewControllerDelegate
     
