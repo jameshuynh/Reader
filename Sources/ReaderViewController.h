@@ -43,5 +43,6 @@
 @property (nonatomic, strong) NSString* title;
 
 - (instancetype)initWithReaderDocument:(ReaderDocument *)object;
+- (instancetype)initWithReaderDocument:(ReaderDocument *)object withTitle:(NSString *)title;
 
 @end
